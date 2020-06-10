@@ -7,11 +7,25 @@
     <body>
         <h1>Control your Hue lights from a webpage</h1>
         <div>
-            <form action="#" th:action="@{/index}" th:object="${hue}" method="POST">
-                <label>Hue ID: </label></br>
-                <input type="text" th:field="*{id}" required></br></br>
-                <input type="submit">
-            </form>
+            <h2>How to enable access to your Hue Hub</h2>
+            <ol style="padding-left: 1.5%;">
+                <li>Visit <a href="https://discovery.meethue.com/">https://discovery.meethue.com/</a> to get the IP address of the bridge</li>
+                <li>Connect to the web page using https://<b>{bridge ip address}</b>/debug}/clip.html</li>
+                <li>In the URL section type: /api</li>
+                <li>In the Message Body Section type: {"devicetype":"my_hue_app#<b>{name}</b>"}</li>
+                <li>Click POST</li>
+                <li>Go to your Hue bridge and press the button</li>
+                <li>Click POST again</li>
+                <li>Copy down the username in the Command Response section</li>
+            </ol>
+            <p>Login below with your Hue username</p>
+            <div>
+                <form action="#" th:action="@{/index}" th:object="${hue}" method="POST">
+                    <label>Username: </label></br>
+                    <input type="text" th:field="*{id}" required></br></br>
+                    <input type="submit">
+                </form>
+            </div>
         </div>
     </body>
 </html>

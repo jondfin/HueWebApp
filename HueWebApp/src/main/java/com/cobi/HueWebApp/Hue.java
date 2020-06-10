@@ -3,17 +3,17 @@ package com.cobi.HueWebApp;
 import java.util.ArrayList;
 
 public class Hue {
-	private String id; //id used to connect to hub
+	private String username; //id used to connect to hub
 	public ArrayList<Light> lights; //list of lights connected to hub
 
 	
 	//Getters and setters are automatically identified
-	public String getId() {
-		return this.id;
+	public String getUsername() {
+		return this.username;
 	}
 	
-	public void setId(String id) {
-		this.id = id;
+	public void setId(String username) {
+		this.username = username;
 	}
 	
 	public void addLights(String name, int color, boolean status) {
