@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Hue Lights Control Login</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </head>
+    <body>
+        <h1>Control your Hue lights from a webpage</h1>
+        <div>
+            <form action="#" th:action="@{/index}" th:object="${hue}" method="POST">
+                <label>Hue ID: </label></br>
+                <input type="text" th:field="*{id}"></br></br>
+                <input type="submit">
+            </form>
+        </div>
+    </body>
+</html>
