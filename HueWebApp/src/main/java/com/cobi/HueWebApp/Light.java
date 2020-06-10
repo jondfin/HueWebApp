@@ -12,6 +12,22 @@ public class Light {
 		this.status = status;
 	}
 	
+	public String getName() {
+		return this.name;
+	}
+
+	public int getColor() {
+		return this.color;
+	}
+	
+	public boolean getStatus() {
+		return this.status;
+	}
+	
+	public void setName(String newName) {
+		this.name = newName;
+	}
+	
 	public void setColor(int value) {
 		this.color = value;
 	}

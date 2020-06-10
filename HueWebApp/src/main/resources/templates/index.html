@@ -9,7 +9,7 @@
         <div>
             <form action="#" th:action="@{/index}" th:object="${hue}" method="POST">
                 <label>Hue ID: </label></br>
-                <input type="text" th:field="*{id}"></br></br>
+                <input type="text" th:field="*{id}" required></br></br>
                 <input type="submit">
             </form>
         </div>
