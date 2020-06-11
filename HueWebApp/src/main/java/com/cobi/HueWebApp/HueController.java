@@ -26,7 +26,7 @@ public class HueController {
 	@PostMapping("/index")
 	public String idSubmit(@ModelAttribute("hue") Hue hue) { //model attribute allows us to grab the hue object created from before
 		System.out.println("Hue username: " + hue.getUsername());
-		hue.getLights();
+		hue.getLightsFromBridge();
 		return "home";
 	}
 	

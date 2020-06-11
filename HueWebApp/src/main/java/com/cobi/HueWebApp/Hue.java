@@ -32,8 +32,10 @@ public class Hue {
 		this.ip = ip;
 	}
 
-	//Contact the bridge to get the list of lights
-	public void getLights() {
+	//Contact bridge to get lights
+	//Note: this isnt name getLights because of how the framework operates
+	//Getters are automatically called(? need to verify this)
+	public void getLightsFromBridge() {
 		final String uri = "http://" + this.ip + "/api/" + this.username + "/lights"; //URI that talks to the bridge
 		System.out.println(uri);
 		RestTemplate restTemplate = new RestTemplate();
@@ -59,5 +61,13 @@ public class Hue {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void addLights() {
+		System.out.println("Adding lights");
+		lights = new ArrayList<>();
+		lights.add(new Light("L1", 0, false));
+		lights.add(new Light("L2", 0, false));
+		lights.add(new Light("L3", 0, false));
 	}
 }
