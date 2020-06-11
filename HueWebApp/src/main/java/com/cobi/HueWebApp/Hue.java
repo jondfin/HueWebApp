@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class Hue {
 	private String username; //id used to connect to bridge
 	private String ip; //ip of the bridge
@@ -34,16 +39,25 @@ public class Hue {
 		RestTemplate restTemplate = new RestTemplate();
 		String result = restTemplate.getForObject(uri, String.class);
 		
-		System.out.println(result); //TODO parse JSON return
-	}
-	
-	//temp
-	public void addLights(String name, int color, boolean status) {
-		//lights.add(new Light(name, color, status));
-		lights = new ArrayList<>();
-		lights.add(new Light("L1", 0x66ccff, true));
-		lights.add(new Light("L2", 0x4dc3ff, false));
-		lights.add(new Light("L3", 0x00334d, false));
-		lights.add(new Light("L4", 0xffffff, true));
+		ObjectMapper objMapper = new ObjectMapper();
+    	JsonNode rootNode;
+		try {
+			rootNode = objMapper.readTree(result);
+			lights = new ArrayList<>();
+			for(int i = 1; i <= rootNode.size(); i++) {
+	    		JsonNode numNode = rootNode.path(Integer.toString(i));
+	    		JsonNode state = numNode.path("state");
+	    		String name = numNode.get("name").asText();
+	    		boolean status = state.get("on").asBoolean();
+	    		//TODO color
+	    		System.out.println(name);
+	    		System.out.println(status);
+	    		lights.add(new Light(name, 0, status));
+	    	}
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 	}
 }
