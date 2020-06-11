@@ -13,7 +13,7 @@
                     <th colspan="2">Status</th>
                     <th colspan="2">Actions</th>
                 </tr>
-                <tr th:each="light: ${hue.lights}">
+                <tr th:each="light: ${lights}">
                     <td colspan="2" th:text="${light.name}"></td>
                     <td colspan="2" th:text="${light.status} ? 'On' : 'Off'"></td>
                     <td colspan="2">

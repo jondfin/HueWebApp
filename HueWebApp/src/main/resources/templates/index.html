@@ -7,7 +7,7 @@
     <body>
         <h1>Control your Hue lights from a webpage</h1>
         <div>
-            <h2>How to enable access to your Hue Hub</h2>
+            <h2>How to enable access to your Hue Bridge</h2>
             <ol style="padding-left: 1.5%;">
                 <li>Visit <a href="https://discovery.meethue.com/">https://discovery.meethue.com/</a> to get the IP address of the bridge</li>
                 <li>Connect to the web page using https://<b>{bridge ip address}</b>/debug}/clip.html</li>
@@ -22,7 +22,9 @@
             <div>
                 <form action="#" th:action="@{/index}" th:object="${hue}" method="POST">
                     <label>Username: </label></br>
-                    <input type="text" th:field="*{id}" required></br></br>
+                    <input type="text" th:field="*{username}" required></br></br>
+                    <label>IP: </label></br>
+                    <input type="text" th:field="*{ip}" required></br></br>
                     <input type="submit">
                 </form>
             </div>
