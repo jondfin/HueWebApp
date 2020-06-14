@@ -1,31 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Hue Lights Control</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    </head>
-    <body>
-        <h1>Successfully connected to your Hue</h1>
-        <div>
-            <table>
-                <tr>
-                    <th colspan="4">Light</th>
-                    <th colspan="2">Status</th>
-                    <th colspan="2">Actions</th>
-                </tr>
-                <tr th:each="light: ${hue.lights}">
-                    <td colspan="4" th:text="${light.name}"></td>
-                    <td colspan="2" th:text="${light.status} ? 'On' : 'Off'"></td>
-                    <td colspan="2">
-                        <span>
-                            <button>Toggle</button>
-                            <button>Change color</button>
-                        </span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        </br></br>
-        <a href="/">Connect to a different hue hub</a>
-    </body>
+
+<head>
+    <title>Hue Lights Control</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <h1>Successfully connected to your Hue</h1>
+    <div>
+        <table>
+            <tr>
+                <th colspan="4">Light</th>
+                <th colspan="4">Status</th>
+                <th colspan="4">Actions</th>
+            </tr>
+            <tr th:each="light: ${hue.lights}">
+                <td colspan="4" th:text="${light.name}"></td>
+                <td colspan="4" th:text="${light.status} ? 'On' : 'Off'"></td>
+                <td colspan="4">
+                    <span>
+                        <form th:action="@{/home}" method="POST">
+                            <input type="hidden" name="id" th:value="${light.id}" />
+                            <button type="submit">Toggle</button>
+                        </form>
+                        <form th:action="@{/home}" method="POST">
+                            <input type="hidden" name="id" th:value="${light.id}"/>
+                            <button type="menu">Change color</button>
+                        </form>
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </br></br>
+    <a href="/">Connect to a different hue hub</a>
+</body>
+
 </html>

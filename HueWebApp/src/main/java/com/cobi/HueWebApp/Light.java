@@ -2,14 +2,20 @@ package com.cobi.HueWebApp;
 
 public class Light {
 	
+	private int id;
 	private String name;
 	private int color; //hex value
 	private boolean status;
 	
-	public Light(String name, int color, boolean status) {
+	public Light(int id, String name, int color, boolean status) {
+		this.id = id;
 		this.name = name;
 		this.color = color;
 		this.status = status;
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 	
 	public String getName() {
