@@ -44,7 +44,7 @@ public class Hue {
 	//Getters are automatically called(? need to verify this)
 	public void getLightsFromBridge() {
 		final String uri = "http://" + ip + "/api/" + username + "/lights"; //URI that talks to the bridge
-		System.out.println(uri);
+//		System.out.println(uri);
 		RestTemplate restTemplate = new RestTemplate();
 		String result = restTemplate.getForObject(uri, String.class);
 		
@@ -59,8 +59,8 @@ public class Hue {
 	    		String name = numNode.get("name").asText();
 	    		boolean status = state.get("on").asBoolean();
 	    		//TODO color
-	    		System.out.println(name);
-	    		System.out.println(status);
+//	    		System.out.println(name);
+//	    		System.out.println(status);
 	    		lights.add(new Light(i, name, 0, status));
 	    	}
 		} catch (JsonMappingException e) {
@@ -73,16 +73,16 @@ public class Hue {
 	//Sends a PUT request to the bridge
 	public void toggleLight(int number) {
 		final String uri = "http://" + ip + "/api/" + username + "/lights/" + number + "/state"; //URI that talks to the bridge
-		System.out.println(uri);
-		System.out.println("Light " + number + " is now " + (lights.get(number-1).getStatus() ? "On" : "Off"));
+//		System.out.println(uri);
 		RestTemplate restTemplate = new RestTemplate();
-		boolean state = lights.get(number-1).getStatus() ? true : false;
+		boolean state = lights.get(number-1).getStatus() ? false : true;
 		HashMap<String, Boolean> params = new HashMap<>();
 		params.put("on", state);
-		HttpEntity entity = new HttpEntity(params);
-		ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.PUT, entity, String.class);
+		HttpEntity<HashMap<String, Boolean>> entity = new HttpEntity<>(params);
+		ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.PUT, entity, String.class); //exchange is able to use any HTTP method. See https://stackoverflow.com/questions/48741238/resttemplate-getforobject-exchange-entity-is-there-any-pros-and-cons-for/48743294 for more detail
 		System.out.println(result.getBody());
 		if(result.getBody().contains("success")) lights.get(number-1).setStatus(); //change current status of light
+		System.out.println("Light " + number + " is now " + (lights.get(number-1).getStatus() ? "On" : "Off"));
 	}
 	
 }
