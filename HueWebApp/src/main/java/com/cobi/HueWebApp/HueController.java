@@ -31,12 +31,32 @@ public class HueController {
 		return "home"; //render home.html
 	}
 	
-	@PostMapping("/home")
+	@PostMapping(value="/home", params="action=toggle")
 	public String toggleLight(@ModelAttribute("hue") Hue hue, @RequestParam("id") int id) {
-		System.out.println("Hue username: " + hue.getUsername());
 		System.out.println("Toggling light " + id);
 		hue.toggleLight(id);
 		return "home";
 	}
 	
+	@PostMapping(value="/home", params="action=color")
+	public String changeColor(@ModelAttribute("hue") Hue hue, @RequestParam("id") int id, @RequestParam("color") int color){
+		System.out.println("Changing light " + id + " to color " + color);
+		System.out.println("Current color: " + color);
+		hue.changeColor(id, color);
+		return "home";
+	}
+	
+	@PostMapping(value="/home", params="action=brightness")
+	public String changeBrightness(@ModelAttribute("hue") Hue hue, @RequestParam("id") int id, @RequestParam("brightness") int brightness) {
+		System.out.println("Changing light " + id + " brightness to " + brightness);
+		hue.changeBrightness(id, brightness);
+		return "home";
+	}
+	
+	@PostMapping(value="/home", params="action=reset")
+	public String resetLight(@ModelAttribute("hue") Hue hue, @RequestParam("id") int id) {
+		System.out.println("Resetting light " + id);
+		hue.resetLight(id);
+		return "home";
+	}
 }
