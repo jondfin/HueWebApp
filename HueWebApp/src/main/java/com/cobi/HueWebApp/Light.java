@@ -1,16 +1,20 @@
 package com.cobi.HueWebApp;
 
+import java.awt.Color;
+
 public class Light {
 	
 	private int id;
 	private String name;
-	private int color; //hex value
+	private Color color; //rgb
+	private int brightness;
 	private boolean status;
 	
-	public Light(int id, String name, int color, boolean status) {
+	public Light(int id, String name, Color color, int brightness, boolean status) {
 		this.id = id;
 		this.name = name;
 		this.color = color;
+		this.brightness = brightness;
 		this.status = status;
 	}
 	
@@ -22,8 +26,12 @@ public class Light {
 		return this.name;
 	}
 
-	public int getColor() {
+	public Color getColor() {
 		return this.color;
+	}
+	
+	public int getBrightness() {
+		return this.brightness;
 	}
 	
 	public boolean getStatus() {
@@ -34,8 +42,12 @@ public class Light {
 		this.name = newName;
 	}
 	
-	public void setColor(int value) {
+	public void setColor(Color value) {
 		this.color = value;
+	}
+	
+	public void setBrightness(int brightness) {
+		this.brightness = brightness;
 	}
 	
 	public void setStatus() {
